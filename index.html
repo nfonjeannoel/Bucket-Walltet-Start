@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucket Wallet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+
+</head>
+<body>
+    <div id="app">
+      <div class="board" >
+        <!-- top bar -->
+    <div class="top-bar">
+        <div class="flex-container">
+
+            <div class="flex-child magenta">
+              BUCKET WALLET
+            </div>
+            
+            <div class="flex-child green">
+              <span>default currency</span>
+              <select @change="" name="fromwallets" id="defaultCurrency" class="default">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="CFA">CFA</option>
+                <option value="CHF">CHF</option>
+              </select>
+            </div>
+            
+          </div>
+    </div>
+
+    <!-- body  -->
+
+    <div class="balances">
+        <div v-for="currency, index in currencies"  class="balance" data-cell>
+          <p>{{getBalance(index)}}</p>
+        </div>
+        <!-- <div class="balance b2" data-cell>
+          <P>0.0 EUR</P>
+          
+        </div>
+        <div class="balance b3" data-cell>
+          <P>0.0 CFA</P>
+    
+        </div>
+        <div class="balance b4" data-cell>
+          <p>0.0 CHF</p>
+          
+        </div> -->
+    </div>
+
+    <div class="swaps">
+      <div class="deposit">
+        <span>Deposit to</span>
+        <select id="depositSelect" name="fromwallets" id="fromwallets">
+          <option v-for="currency in currencies" value="currency.name">{{currency.name}}</option>
+          
+        </select>
+      
+        <div class="pop-up">
+          <form action="">
+            <input id="depositAmount" type="number" placeholder="enter amount" min="0">
+            <br>
+            <button type="button" @click="deposit()">deposit</button>
+          </form>
+        </div>
+        
+      </div>
+
+      <div class="transfer">
+        <span>Transfer from </span>
+        <select class="transferSelect" name="fromwallets" id="transferFrom">
+          <option v-for="currency in currencies" value="currency.name">{{currency.name}}</option>
+          
+        </select>
+        <span>to</span>
+        <select  name="towallets" id="transferTo">
+          <option v-for="currency in currencies" value="currency.name">{{currency.name}}</option>
+
+        </select>
+        <div class="pop-up">
+          <form action="">
+            <input type="text" id="transferAmount" placeholder="enter amount">
+            <br>
+            <button type="button" @click="transfer()">transfer</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="total-balance">
+      <p>{{getTotalBalance}}</p>
+    </div>
+
+    </div>
+    </div>
+
+
+    <script src="scripts.js"></script>
+    <script>
+      const mountedAppp = app.mount('#app')
+    </script>
+</body>
+</html>
